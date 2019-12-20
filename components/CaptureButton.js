@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 
 const CaptureButton = props => {
   return (
-    <TouchableHighlight style={styles.captureButton} disabled={this.props.buttonDisabled}>
+    <TouchableHighlight style={styles.captureButton} disabled={props.buttonDisabled}>
       <Button onPress={props.onClick} disabled={props.buttonDisabled} title="Capture" accessibilityLabel="Learn more about this button"/>
     </TouchableHighlight>
   )

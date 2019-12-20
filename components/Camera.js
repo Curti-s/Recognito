@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 export default class Camera extends React.Component {
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       identifiedAs: '',
       loading: false,
     }
@@ -36,7 +36,7 @@ export default class Camera extends React.Component {
       this.camera.pausePreview();
       
       // update camera state to indicate loading
-      this.setState(({previousState, props}) => ({ loading: true}));
+      this.setState((previousState, props) => ({ loading: true}));
       
       // set the options of the camera
       const options = { base64: true};
@@ -55,10 +55,14 @@ export default class Camera extends React.Component {
     
     const app = new Clarifai.App({ apiKey: '931175fa132b4d858e16270e9fe6a45d' });
 
-    // Identify the image
-    app.models.predict(Clarifai.GENERAL_MODEL, { base64: imageData })
-          .then(response => this.displayAnswer(response.outputs[0].data.concepts[0].name))
-          .catch(err => alert(err));
+    try {
+      // Identify the image
+      app.models.predict(Clarifai.GENERAL_MODEL, { base64: imageData })
+            .then(response => this.displayAnswer(response.outputs[0].data.concepts[0].name))
+            .catch(err => alert(err));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   displayAnswer = (identifiedImage) => {
