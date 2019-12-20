@@ -30,7 +30,7 @@ export default class Camera extends React.Component {
   }
 
   takePicture = async () => {
-    if(camera) {
+    if(this.camera) {
 
       // pause the camera preview
       this.camera.pausePreview();
@@ -42,7 +42,7 @@ export default class Camera extends React.Component {
       const options = { base64: true};
       
       // get the base64 version of the image
-      const data = await this.camera.takePcitureAsync(options);
+      const data = await this.camera.takePictureAsync(options);
 
       // take the base64 representation of the image and pass it to Clarifai Api
       this.identifyImage(data.base64);
